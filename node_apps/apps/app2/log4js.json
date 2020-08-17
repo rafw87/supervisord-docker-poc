@@ -1,0 +1,14 @@
+{
+  "appenders": {
+    "console": {
+      "type": "stdout",
+      "layout": {
+        "type": "pattern",
+        "pattern": "%d{yyyy-MM-dd hh.mm.ss.SSS} [app2] [%p] %c %m"
+      }
+    }
+  },
+  "categories": {
+    "default": { "appenders": [ "console" ], "level": "DEBUG" }
+  }
+}
