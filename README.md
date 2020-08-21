@@ -15,6 +15,49 @@ Features:
 - allows to define [event listener](http://supervisord.org/events.html), able to react on specific events
 - seems to have good community with many [plugins](http://supervisord.org/plugins.html)
 
+## Usage
+### Starting:
+```sh
+$ docker-compose up
+```
+
+### Logs:
+```sh
+$ docker-compose logs -f supervisord-demo
+```
+
+### Stopping container (gracefully):
+```sh
+$ docker-compose down
+```
+
+### Force shutdown single app with REST API (should gracefully shutdown whole container):
+```sh
+curl --request POST "http://localhost:8080/stop" \
+     --header 'Content-Type: application/json' \
+     -d '{ "exitCode": 1, "delay": 2000 }'
+```
+Or using provided script:
+```sh
+./demo/stop.sh 8080 1 2000
+```
+(arguments: `port exitCode delay`)
+
+
+### Force log some text to console
+```sh
+curl --request POST "http://localhost:8080/log/{level}" \
+     --header 'Content-Type: text/plain' \
+     -d 'message'
+```
+where level is one of following: `error`, `warn`, `info`, `debug`, `trace`.
+
+Using provided script:
+```sh
+./demo/log.sh 8080 'message' info
+```
+(arguments: `port message level`)
+
 
 ## Contents
 
